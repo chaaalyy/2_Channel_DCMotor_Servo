@@ -1,0 +1,184 @@
+Configuration	DC_MotorController_stepDir
+STM32CubeMX 	5.6.0
+Date	04/12/2020
+MCU	STM32F401RETx
+
+
+
+PERIPHERALS	MODES	FUNCTIONS	PINS
+RCC	BYPASS Clock Source	RCC_OSC_IN	PH0 - OSC_IN
+RCC	BYPASS Clock Source	RCC_OSC_OUT	PH1 - OSC_OUT
+RCC	Crystal/Ceramic Resonator	RCC_OSC32_IN	PC14-OSC32_IN
+RCC	Crystal/Ceramic Resonator	RCC_OSC32_OUT	PC15-OSC32_OUT
+SYS	Serial Wire	SYS_JTCK-SWCLK	PA14
+SYS	Serial Wire	SYS_JTMS-SWDIO	PA13
+SYS	TIM10	SYS_VS_tim10	VP_SYS_VS_tim10
+TIM1	Encoder Mode	TIM1_CH1	PA8
+TIM1	Encoder Mode	TIM1_CH2	PA9
+TIM2	Internal Clock	TIM2_VS_ClockSourceINT	VP_TIM2_VS_ClockSourceINT
+TIM2	PWM Generation CH1	TIM2_CH1	PA15
+TIM2	PWM Generation CH3	TIM2_CH3	PB10
+TIM3	External Clock Mode 1	TIM3_VS_ControllerModeClock	VP_TIM3_VS_ControllerModeClock
+TIM3	TI1FP1	TIM3_CH1	PA6
+TIM4	External Clock Mode 1	TIM4_VS_ControllerModeClock	VP_TIM4_VS_ControllerModeClock
+TIM4	TI1FP1	TIM4_CH1	PB6
+TIM5	Encoder Mode	TIM5_CH1	PA0-WKUP
+TIM5	Encoder Mode	TIM5_CH2	PA1
+USART2	Asynchronous	USART2_RX	PA3
+USART2	Asynchronous	USART2_TX	PA2
+
+
+
+Pin Nb	PINs	FUNCTIONs	LABELs
+2	PC13-ANTI_TAMP	GPIO_EXTI13	B1 [Blue PushButton]
+3	PC14-OSC32_IN	RCC_OSC32_IN	
+4	PC15-OSC32_OUT	RCC_OSC32_OUT	
+5	PH0 - OSC_IN	RCC_OSC_IN	
+6	PH1 - OSC_OUT	RCC_OSC_OUT	
+8	PC0	GPIO_Output	
+9	PC1	GPIO_Output	
+10	PC2	GPIO_Output	
+11	PC3	GPIO_Output	
+14	PA0-WKUP	TIM5_CH1	Mot1_Encoder_A
+15	PA1	TIM5_CH2	Mot1_Encoder_B
+16	PA2	USART2_TX	USART_TX
+17	PA3	USART2_RX	USART_RX
+20	PA4	GPIO_Output	Mot2_DIR_Out
+21	PA5	GPIO_Output	LD2 [Green Led]
+22	PA6	TIM3_CH1	stepSignal_Mot1
+23	PA7	GPIO_EXTI7	dirSignal_Mot1
+24	PC4	GPIO_Output	
+25	PC5	GPIO_Output	
+26	PB0	GPIO_Output	
+27	PB1	GPIO_Output	
+28	PB2	GPIO_Input	CONFIG_JP2
+29	PB10	TIM2_CH3	Mot1_PWM_Out
+33	PB12	GPIO_Output	
+34	PB13	GPIO_Output	
+35	PB14	GPIO_Output	
+36	PB15	GPIO_Output	
+37	PC6	GPIO_Output	
+38	PC7	GPIO_Output	
+39	PC8	GPIO_Output	
+40	PC9	GPIO_Output	
+41	PA8	TIM1_CH1	Mot2_Encoder_A
+42	PA9	TIM1_CH2	Mot2_Encoder_B
+43	PA10	GPIO_Output	
+44	PA11	GPIO_Output	
+45	PA12	GPIO_Output	
+46	PA13	SYS_JTMS-SWDIO	TMS
+49	PA14	SYS_JTCK-SWCLK	TCK
+50	PA15	TIM2_CH1	Mot2_PWM_Out
+51	PC10	GPIO_Output	
+52	PC11	GPIO_Output	
+53	PC12	GPIO_Output	
+54	PD2	GPIO_Output	
+55	PB3*	SYS_JTDO-SWO	SWO
+56	PB4	GPIO_Output	Mot1_DIR_Out
+57	PB5	GPIO_EXTI5	dirSignal_Mot2
+58	PB6	TIM4_CH1	stepSignal_Mot2
+59	PB7	GPIO_Input	CONFIG_JP1
+61	PB8	GPIO_Output	
+62	PB9	GPIO_Output	
+PERIPHERALS	MODES	FUNCTIONS	PINS
+RCC	BYPASS Clock Source	RCC_OSC_IN	PH0 - OSC_IN
+RCC	BYPASS Clock Source	RCC_OSC_OUT	PH1 - OSC_OUT
+RCC	Crystal/Ceramic Resonator	RCC_OSC32_IN	PC14-OSC32_IN
+RCC	Crystal/Ceramic Resonator	RCC_OSC32_OUT	PC15-OSC32_OUT
+SYS	Serial Wire	SYS_JTCK-SWCLK	PA14
+SYS	Serial Wire	SYS_JTMS-SWDIO	PA13
+SYS	TIM10	SYS_VS_tim10	VP_SYS_VS_tim10
+TIM1	Encoder Mode	TIM1_CH1	PA8
+TIM1	Encoder Mode	TIM1_CH2	PA9
+TIM2	Internal Clock	TIM2_VS_ClockSourceINT	VP_TIM2_VS_ClockSourceINT
+TIM2	PWM Generation CH1	TIM2_CH1	PA15
+TIM2	PWM Generation CH3	TIM2_CH3	PB10
+TIM3	External Clock Mode 1	TIM3_VS_ControllerModeClock	VP_TIM3_VS_ControllerModeClock
+TIM3	TI1FP1	TIM3_CH1	PA6
+TIM4	External Clock Mode 1	TIM4_VS_ControllerModeClock	VP_TIM4_VS_ControllerModeClock
+TIM4	TI1FP1	TIM4_CH1	PB6
+TIM5	Encoder Mode	TIM5_CH1	PA0-WKUP
+TIM5	Encoder Mode	TIM5_CH2	PA1
+USART2	Asynchronous	USART2_RX	PA3
+USART2	Asynchronous	USART2_TX	PA2
+
+
+
+Pin Nb	PINs	FUNCTIONs	LABELs
+2	PC13-ANTI_TAMP	GPIO_EXTI13	B1 [Blue PushButton]
+3	PC14-OSC32_IN	RCC_OSC32_IN	
+4	PC15-OSC32_OUT	RCC_OSC32_OUT	
+5	PH0 - OSC_IN	RCC_OSC_IN	
+6	PH1 - OSC_OUT	RCC_OSC_OUT	
+8	PC0	GPIO_Output	
+9	PC1	GPIO_Output	
+10	PC2	GPIO_Output	
+11	PC3	GPIO_Output	
+14	PA0-WKUP	TIM5_CH1	Mot1_Encoder_A
+15	PA1	TIM5_CH2	Mot1_Encoder_B
+16	PA2	USART2_TX	USART_TX
+17	PA3	USART2_RX	USART_RX
+20	PA4	GPIO_Output	Mot2_DIR_Out
+21	PA5	GPIO_Output	LD2 [Green Led]
+22	PA6	TIM3_CH1	stepSignal_Mot1
+23	PA7	GPIO_EXTI7	dirSignal_Mot1
+24	PC4	GPIO_Output	
+25	PC5	GPIO_Output	
+26	PB0	GPIO_Output	
+27	PB1	GPIO_Output	
+28	PB2	GPIO_Input	CONFIG_JP2
+29	PB10	TIM2_CH3	Mot1_PWM_Out
+33	PB12	GPIO_Output	
+34	PB13	GPIO_Output	
+35	PB14	GPIO_Output	
+36	PB15	GPIO_Output	
+37	PC6	GPIO_Output	
+38	PC7	GPIO_Output	
+39	PC8	GPIO_Output	
+40	PC9	GPIO_Output	
+41	PA8	TIM1_CH1	Mot2_Encoder_A
+42	PA9	TIM1_CH2	Mot2_Encoder_B
+43	PA10	GPIO_Output	
+44	PA11	GPIO_Output	
+45	PA12	GPIO_Output	
+46	PA13	SYS_JTMS-SWDIO	TMS
+49	PA14	SYS_JTCK-SWCLK	TCK
+50	PA15	TIM2_CH1	Mot2_PWM_Out
+51	PC10	GPIO_Output	
+52	PC11	GPIO_Output	
+53	PC12	GPIO_Output	
+54	PD2	GPIO_Output	
+55	PB3*	SYS_JTDO-SWO	SWO
+56	PB4	GPIO_Output	Mot1_DIR_Out
+57	PB5	GPIO_EXTI5	dirSignal_Mot2
+58	PB6	TIM4_CH1	stepSignal_Mot2
+59	PB7	GPIO_Input	CONFIG_JP1
+61	PB8	GPIO_Output	
+62	PB9	GPIO_Output	
+
+
+
+SOFTWARE PROJECT
+
+Project Settings : 
+Project Name : DC_MotorController_stepDir
+Project Folder : D:\CubeIDE_Workspace\DC_MotorController_stepDir
+Toolchain / IDE : STM32CubeIDE
+Firmware Package Name and Version : STM32Cube FW_F4 V1.25.0
+
+
+Code Generation Settings : 
+STM32Cube MCU packages and embedded software packs : Copy only the necessary library files
+Generate peripheral initialization as a pair of '.c/.h' files per peripheral : No
+Backup previously generated files when re-generating : No
+Delete previously generated files when not re-generated : Yes
+Set all free pins as analog (to optimize the power consumption) : No
+
+
+Toolchains Settings : 
+Compiler Optimizations : 
+
+
+
+
+
