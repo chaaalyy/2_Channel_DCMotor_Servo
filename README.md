@@ -6,8 +6,8 @@ If you need to control brushed DC Motors with step/dir signals, commonly used fo
 My own parts of the code are licensed under GNU GENERAL PUBLIC LICENSE V3.0
 
 I added two config jumpers to give you more flexibility:
-J1 decides, if two or one input channels should be used (one: two motors synchronized, two: each motor controlled separately)
-J2 in single channel mode: which channel to use, in two channel mode: you can swap the channels
+J1 decides, if two or one input channels should be used (one: two motors synchronized, two: each motor controlled separately).
+J2 in single channel mode: which channel to use, in two channel mode: you can swap the channels.
 Of course, it´s also possible to control just one motor: config dual channel and just don´t use the 2nd one ;)
 
 Created with ST´s cubeIDE 1.3 , hardware config via integrated cubeMX. Unused GPIOs are all set to GPIO_output without further label to get better emf stability. Used pins are marked and should be clearly visible via the cubeMX configuration.
