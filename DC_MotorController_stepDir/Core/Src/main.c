@@ -654,7 +654,23 @@ void Error_Handler(void)
 {
   /* USER CODE BEGIN Error_Handler_Debug */
   /* User can add his own implementation to report the HAL error return state */
+  // Ensure LD2_GPIO_Port clock is enabled (usually done in HAL_Init or HAL_MspInit)
+  // For Nucleo-F401RE, LD2 is on PA5. GPIOA clock must be enabled.
+  // This is typically handled by MX_GPIO_Init calling __HAL_RCC_GPIOA_CLK_ENABLE().
+  // MX_GPIO_Init() also configures LD2_Pin as output.
 
+  // Turn on LD2 (User LED) to indicate an error
+  HAL_GPIO_WritePin(LD2_GPIO_Port, LD2_Pin, GPIO_PIN_SET);
+
+  // Disable all interrupts to prevent further operations from interfering
+  __disable_irq();
+
+  // Enter an infinite loop to halt the system.
+  // This makes the error state persistent and observable.
+  while (1)
+  {
+    // Loop indefinitely
+  }
   /* USER CODE END Error_Handler_Debug */
 }
 

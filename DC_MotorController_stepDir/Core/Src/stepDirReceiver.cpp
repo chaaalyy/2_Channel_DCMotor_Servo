@@ -13,11 +13,11 @@ stepDirReceiver::stepDirReceiver(TIM_HandleTypeDef* stepTimer, GPIO_TypeDef* dir
     DIR_GPIO_PORT = dirPort;
     DIR_GPIO_PIN = dirPin;
 
-    STP_CNT_OF = 0;
-    STP_PULSES = 0;
-    STP_LAST_VALUE = 0;
+    STP_CNT_OF = 0; // int16_t: Stores number of overflows/underflows
+    // STP_PULSES is no longer used with the new logic
+    STP_LAST_VALUE = 0; // uint32_t, but will effectively store uint16_t from timer
 
-    stepPosition = extVar;
+    stepPosition = extVar; // int32_t*
 
     InitHardware();
 }
@@ -26,32 +26,39 @@ stepDirReceiver::~stepDirReceiver() {
 }
 
 void stepDirReceiver::InitHardware() {
-   	STEP_TIMER->Instance->ARR = 0xFFFF;
+   	STEP_TIMER->Instance->ARR = 0xFFFF; // Set timer period to max for full 16-bit range
    	HAL_TIM_Base_Start (STEP_TIMER);
 }
 
 void stepDirReceiver::SetStepDirPosition()
 {
-	uint16_t timCounterTemp = STEP_TIMER->Instance->CNT;
-	STP_PULSES= timCounterTemp;
-	if (STP_PULSES != STP_LAST_VALUE)
-	{
-		STP_PULSES &= 0xC000;
-		STP_LAST_VALUE &= 0xC000;
-		if (STP_PULSES == 0 && STP_LAST_VALUE == 0xC000){
-			STP_CNT_OF++;
-		}
-		if (STP_PULSES == 0xC000 && STP_LAST_VALUE == 0){
-			STP_CNT_OF--;
-		}
-	}
+	uint16_t timCounterTemp = STEP_TIMER->Instance->CNT; // Raw 16-bit timer value
 
-	if (STP_CNT_OF < 0)
-		*stepPosition = ((STP_CNT_OF + 1) * (0xFFFF +1)) - ((0xFFFF + 1) - timCounterTemp);
-	else
-		*stepPosition = (STP_CNT_OF * (0xFFFF +1)) + timCounterTemp;
+    // Corrected overflow/underflow detection for a 16-bit timer (0x0000 to 0xFFFF).
+    // This logic assumes the timer changes by less than 0x8000 (32768) in one sample period.
+    // An overflow is detected if the last value was in the upper quadrant (e.g., >0xC000)
+    // and the current value is in the lower quadrant (e.g., <0x4000), indicating a wrap-around from 0xFFFF to 0.
+    // Cast STP_LAST_VALUE to uint16_t for comparison as it stores the previous timer count.
+    if ((uint16_t)STP_LAST_VALUE > 0xC000 && timCounterTemp < 0x4000) {
+        STP_CNT_OF++; // Increment overflow counter
+    }
+    // An underflow is detected if the last value was in the lower quadrant (e.g., <0x4000)
+    // and the current value is in the upper quadrant (e.g., >0xC000), indicating a wrap-around from 0 to 0xFFFF.
+    else if ((uint16_t)STP_LAST_VALUE < 0x4000 && timCounterTemp > 0xC000) {
+        STP_CNT_OF--; // Decrement overflow counter
+    }
 
-	STP_LAST_VALUE = timCounterTemp;
+    // Update last known value with the current raw timer value for the next cycle.
+    // Though STP_LAST_VALUE is uint32_t, we are assigning a uint16_t to it.
+    // This is acceptable as it's only used to store the previous 16-bit timer state.
+    STP_LAST_VALUE = timCounterTemp;
+
+    // Calculate current absolute step position.
+    // STP_CNT_OF (int16_t) stores the number of full 16-bit overflows/underflows.
+    // timCounterTemp (uint16_t) is the current 16-bit timer count.
+    // 65536 (which is 0xFFFF + 1) is used as the multiplier for the overflow count.
+    // The target stepPosition is int32_t.
+    *stepPosition = (int32_t)(((int32_t)STP_CNT_OF * 65536L) + timCounterTemp);
 }
 
 void stepDirReceiver::ToggleCounterDirection() { //triggered by ExtI !!!
