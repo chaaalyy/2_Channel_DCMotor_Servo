@@ -106,7 +106,8 @@ void checkError(bool* errorFlag)
 	else {
 		mot1->StopMotor();
 		mot2->StopMotor();
-		HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, GPIO_PIN_SET); //LED on PA5 ON
+		// LD2_GPIO_Port and LD2_Pin are defined in main.h (e.g., GPIOA, GPIO_PIN_5)
+		HAL_GPIO_WritePin(LD2_GPIO_Port, LD2_Pin, GPIO_PIN_SET); // Turn on LD2 (User LED on PA5)
 		while(1) {
 			asm("nop");
 		}
